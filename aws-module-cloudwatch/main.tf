@@ -48,7 +48,7 @@ EOF
 
 
 
-# Creating the AWS CLoudwatch Alarm that will autoscale the AWS EC2 instance based on CPU utilization.
+# Creatings the AWS CLoudwatch Alarm that will autoscale the AWS EC2 instance based on CPU utilization.
 resource "aws_cloudwatch_metric_alarm" "this" {
   alarm_name                = var.alarm_name
   comparison_operator       = var.comparison_operator
