@@ -10,7 +10,10 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
- 
+    env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         AWS_DEFAULT_REGION: eu-central-1
 
     steps:
       - name: Checkout
@@ -31,10 +34,6 @@ jobs:
         if: github.event_name == 'push'
         run: terraform plan -no-color
         working-directory: "./cloudwatch-module"
-        env:	
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_DEFAULT_REGION: 'eu-central-1'
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
