@@ -12,7 +12,7 @@ period = "120"
 statistic = "Average"
 threshold = "80"
 alarm_description = "This metric monitors ec2 cpu utilization"
-retention_in_days = 60
+retention_in_days = 90
 
 
 }
