@@ -21,20 +21,22 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.1.7
-
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: |
+            rm -rf .terraform
+            terraform init
         working-directory: "./cloudwatch-module"
 
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'push'
         run: terraform plan -no-color
+        working-directory: "./cloudwatch-module"
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
+        working-directory: "./cloudwatch-module"
+
